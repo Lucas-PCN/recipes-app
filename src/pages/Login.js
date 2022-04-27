@@ -22,14 +22,14 @@ function Login() {
 
   const history = useHistory();
   function submitButton() {
-    const six = 6;
+    const minLength = 6;
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isEmailValid = regexEmail.test(email);
 
     const campos = [password, email];
     const todosCamposValidos = campos.every((field) => field !== '');
 
-    if (password.length >= six
+    if (password.length >= minLength
     && todosCamposValidos
     && isEmailValid) {
       setDisabled(false);
