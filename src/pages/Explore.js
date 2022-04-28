@@ -1,25 +1,16 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import drinkIcon from '../images/drinkIcon.svg';
-import exploreIcon from '../images/exploreIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import Header from '../components/Header';
+// import { useHistory } from 'react-router-dom';
+// import drinkIcon from '../images/drinkIcon.svg';
+// import exploreIcon from '../images/exploreIcon.svg';
+// import mealIcon from '../images/mealIcon.svg';
 
-function Explorer() {
-  const history = useHistory();
+function Explore() {
+  // const history = useHistory();
   return (
     <div>
-      <header>
-        <button
-          type="button"
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-        >
-          <img src={ profileIcon } alt="profileIcon" />
-        </button>
-        <h2 data-testid="page-title">Explore</h2>
-      </header>
-      <button
+      <Header title="Explore" shouldRenderMagnifier={ false } />
+      {/* <button
         type="button"
         data-testid="explore-foods"
         onClick={ history.push() }
@@ -55,9 +46,9 @@ function Explorer() {
         >
           <img src={ mealIcon } alt="mealIcon" />
         </button>
-      </footer>
+      </footer> */}
     </div>
   );
 }
 
-export default Explorer;
+export default Explore;
