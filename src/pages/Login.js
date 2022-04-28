@@ -64,20 +64,30 @@ function Login() {
         >
           Glass
         </object>
-        <input
-          type="email"
-          data-testid="email-input"
-          placeholder="e-mail"
-          value={ email }
-          onChange={ onInputChangeEmail }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          placeholder="senha"
-          value={ password }
-          onChange={ onInputChangePassword }
-        />
+        <label htmlFor="emailInput">
+          Email
+          <br />
+          <input
+            type="email"
+            id="emailInput"
+            data-testid="email-input"
+            placeholder="e-mail"
+            value={ email }
+            onChange={ onInputChangeEmail }
+          />
+        </label>
+        <label htmlFor="passwordInput">
+          Senha
+          <br />
+          <input
+            type="password"
+            id="passwordInput"
+            data-testid="password-input"
+            placeholder="senha"
+            value={ password }
+            onChange={ onInputChangePassword }
+          />
+        </label>
         <button
           type="button"
           data-testid="login-submit-btn"

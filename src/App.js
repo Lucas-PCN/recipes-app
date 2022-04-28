@@ -5,6 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
+import Explore from './pages/Explore';
+import Profile from './pages/Profile';
+import ExploreFoods from './pages/ExploreFoods';
+import ExploreDrinks from './pages/ExploreDrinks';
+import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
+import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
+import ExploreFoodsNationalities from './pages/ExploreFoodsNationalities';
 import FoodDetails from './pages/FoodDetails';
 import DrinkDetails from './pages/DrinkDetails';
 import DrinkDetailsInProgress from './pages/DrinkDetailsInProgress';
@@ -17,7 +24,7 @@ function App() {
       <Switch>
         <Provider>
           {/* <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-          <Route exact path="/done-recipes" component={ DoneRecipes } />
+          <Route exact path="/done-recipes" component={ DoneRecipes } /> */}
           <Route exact path="/profile" component={ Profile } />
           <Route
             exact
@@ -36,7 +43,7 @@ function App() {
           />
           <Route exact path="/explore/drinks" component={ ExploreDrinks } />
           <Route exact path="/explore/foods" component={ ExploreFoods } />
-          <Route exact path="/explore" component={ Explore } /> */}
+          <Route exact path="/explore" component={ Explore } />
           <Route
             exact
             path="/drinks/:id_da_receita/in-progress"

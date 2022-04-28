@@ -1,7 +1,8 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import profileIcon from '../images/profileIcon.svg';
 
-function Explorer() {
+function ExplorerFoods() {
   return (
     <div>
       <header>
@@ -12,22 +13,29 @@ function Explorer() {
         >
           <img src={ profileIcon } alt="profileIcon" />
         </button>
-        <h2 data-testid="page-title">Explore</h2>
+        <h2 data-testid="page-title">Explore Foods</h2>
       </header>
       <button
         type="button"
-        data-testid="explore-foods"
+        data-testid="explore-by-ingredient"
       >
-        Explore Foods
+        By Ingredient
       </button>
       <button
         type="button"
-        data-testid="explore-drinks"
+        data-testid="explore-by-nationality"
       >
-        Explore Drinks
+        By Nationality
       </button>
+      <button
+        type="button"
+        data-testid="explore-surprise"
+      >
+        Surprise me!
+      </button>
+      <Footer />
     </div>
   );
 }
 
-export default Explorer;
+export default ExplorerFoods;
