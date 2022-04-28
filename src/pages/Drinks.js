@@ -1,9 +1,9 @@
 import React from 'react';
-import HeaderDrinks from '../components/HeaderDrinks';
+import Header from '../components/Header';
 
 function Drinks() {
   return (
-    <HeaderDrinks />
+    <Header title="Drinks" shouldRenderMagnifier />
   );
 }
 
