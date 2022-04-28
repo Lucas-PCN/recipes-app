@@ -1,15 +1,14 @@
 import React from 'react';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function ExplorerDrinks() {
+function ExploreDrinks() {
   return (
     <div>
-      <header>
-        <h2 data-testid="page-title">Explore Drinks</h2>
-      </header>
+      <Header title="Explore Drinks" shouldRenderMagnifier={ false } />
       <Footer />
     </div>
   );
 }
 
-export default ExplorerDrinks;
+export default ExploreDrinks;

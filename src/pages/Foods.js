@@ -1,11 +1,11 @@
 import React from 'react';
-import HeaderFoods from '../components/HeaderFoods';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Foods() {
   return (
     <>
-      <HeaderFoods />
+      <Header title="Foods" shouldRenderMagnifier />
       <Footer />
     </>
   );

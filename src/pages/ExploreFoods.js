@@ -1,20 +1,11 @@
 import React from 'react';
 import Footer from '../components/Footer';
-import profileIcon from '../images/profileIcon.svg';
+import Header from '../components/Header';
 
 function ExplorerFoods() {
   return (
     <div>
-      <header>
-        <button
-          type="button"
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-        >
-          <img src={ profileIcon } alt="profileIcon" />
-        </button>
-        <h2 data-testid="page-title">Explore Foods</h2>
-      </header>
+      <Header title="Explore Foods" shouldRenderMagnifier={ false } />
       <button
         type="button"
         data-testid="explore-by-ingredient"
