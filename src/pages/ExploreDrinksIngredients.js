@@ -12,4 +12,3 @@ function ExploreDrinksIngredients() {
 }
 
 export default ExploreDrinksIngredients;
-

@@ -4,8 +4,10 @@ import Footer from '../components/Footer';
 
 function Profile() {
   return (
-    <Header title="Profile" shouldRenderMagnifier={ false } />
-    <Footer />
+    <>
+      <Header title="Profile" shouldRenderMagnifier={ false } />
+      <Footer />
+    </>
   );
 }
 

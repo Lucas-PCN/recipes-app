@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-function ExplorerFoodsIngredients() {
+function ExploreFoodsIngredients() {
   return (
     <div>
       <Header title="Explore Ingredients" shouldRenderMagnifier={ false } />
