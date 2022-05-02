@@ -1,69 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MyContext from '../context/MyContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import fetchSearchByName from '../services/fetchSearchByName';
-import fetchSearchByNameDrinks from '../services/fetchSearchByName_Drinks';
-import fetchSearchByIngredients from '../services/fetchSearchByIngredient';
-import fetchSearchByIngredientsDrinks from '../services/fetchSearchByIngredients_Drinks';
-import fetchSearchByFirstLetter from '../services/fetchSearchByFirstLetter';
-import fetchSearchByFirstLetterDrinks from '../services/fetchSearchByFirstLetter_Drinks';
+import SearchBar from './SearchBar';
 
 function Header(props) {
   const [shouldRenderInput, handleInput] = useState(false);
-  const [radioValue, setRadioValue] = useState('Ingredient');
-  const { inputText, setInputText } = useContext(MyContext);
   const { title } = props;
   const { shouldRenderMagnifier } = props;
   const history = useHistory();
-
-  function targetInput({ target }) {
-    setInputText(target.value);
-  }
-
-  const url = window.location.href;
-  const urlDrinks = 'http://localhost:3000/drinks';
-  function teste1() {
-    if (radioValue === 'Ingredient') {
-      fetchSearchByIngredients(inputText);
-      if (url === urlDrinks) {
-        fetchSearchByIngredientsDrinks(inputText);
-      }
-    }
-  }
-
-  function teste2() {
-    if (radioValue === 'Name') {
-      fetchSearchByName(inputText);
-      if (url === urlDrinks) {
-        fetchSearchByNameDrinks(inputText);
-      }
-    }
-  }
-  function teste3() {
-    if (radioValue === 'FirstLetter') {
-      fetchSearchByFirstLetter(inputText);
-      if (url === urlDrinks) {
-        fetchSearchByFirstLetterDrinks(inputText);
-      }
-      if (inputText.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
-      }
-    }
-  }
-
-  function searchByRadioButton() {
-    teste1();
-    teste2();
-    teste3();
-  }
-
-  function click() {
-    searchByRadioButton();
-  }
-  console.log(radioValue);
 
   if (shouldRenderMagnifier) {
     return (
@@ -88,61 +34,7 @@ function Header(props) {
           <img src={ searchIcon } alt="searchIcon" />
         </button>
 
-        {shouldRenderInput && (
-          <div>
-            <input
-              type="text"
-              data-testid="search-input"
-              placeholder="Buscar"
-              onChange={ targetInput }
-              value={ inputText }
-              id="inputText"
-            />
-            <label htmlFor="ingredient-search">
-              <input
-                type="radio"
-                id="ingredient-search"
-                data-testid="ingredient-search-radio"
-                value="Ingredient"
-                name="radioButton"
-                checked={ radioValue === 'Ingredient' }
-                onClick={ ({ target }) => setRadioValue(target.value) }
-              />
-              Ingredient
-            </label>
-            <label htmlFor="name-search">
-              <input
-                type="radio"
-                id="dname-search"
-                data-testid="name-search-radio"
-                value="Name"
-                name="radioButton"
-                checked={ radioValue === 'Name' }
-                onClick={ ({ target }) => setRadioValue(target.value) }
-              />
-              Name
-            </label>
-            <label htmlFor="first-letter-search">
-              <input
-                type="radio"
-                id="first-letter-search"
-                data-testid="first-letter-search-radio"
-                value="FirstLetter"
-                name="radioButton"
-                checked={ radioValue === 'FirstLetter' }
-                onClick={ ({ target }) => setRadioValue(target.value) }
-              />
-              First Letter
-            </label>
-            <button
-              type="button"
-              data-testid="exec-search-btn"
-              onClick={ click }
-            >
-              Search
-            </button>
-          </div>
-        )}
+        {shouldRenderInput && <SearchBar />}
       </header>
     );
   }
