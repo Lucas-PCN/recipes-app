@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react';
 import MyContext from '../context/MyContext';
-import fetchSearchByName from '../services/fetchSearchByName';
-import fetchSearchByNameDrinks from '../services/fetchSearchByName_Drinks';
-import fetchSearchByIngredients from '../services/fetchSearchByIngredient';
-import fetchSearchByIngredientsDrinks from '../services/fetchSearchByIngredients_Drinks';
-import fetchSearchByFirstLetter from '../services/fetchSearchByFirstLetter';
-import fetchSearchByFirstLetterDrinks from '../services/fetchSearchByFirstLetter_Drinks';
 
 function SearchBar() {
   const [radioValue, setRadioValue] = useState('Ingredient');
-  const { inputText, setInputText } = useContext(MyContext);
+  const { inputText,
+    setInputText,
+    fetchSearchByName,
+    fetchSearchByNameDrinks,
+    fetchSearchByIngredientsDrinks,
+    fetchSearchByIngredients,
+    fetchSearchByFirstLetter,
+    fetchSearchByFirstLetterDrinks } = useContext(MyContext);
 
   function targetInput({ target }) {
     setInputText(target.value);
@@ -17,7 +18,7 @@ function SearchBar() {
 
   const url = window.location.href;
   const urlDrinks = 'http://localhost:3000/drinks';
-  function searchByRadioButton() {
+  async function searchByRadioButton() {
     if (radioValue === 'Ingredient') {
       fetchSearchByIngredients(inputText);
       if (url === urlDrinks) {
