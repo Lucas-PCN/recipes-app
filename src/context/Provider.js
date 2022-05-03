@@ -38,6 +38,7 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
+    console.log(data);
     setResultDataDrinks(data.drinks);
   }
 

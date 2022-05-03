@@ -26,13 +26,13 @@ function SearchBar() {
   function searchByRadioButton() {
     if (radioValue === 'Ingredient' && url === urlFoods) {
       fetchSearchByIngredients(inputText);
-    } else if (url === urlDrinks) {
+    } else if (radioValue === 'Ingredient' && url === urlDrinks) {
       fetchSearchByIngredientsDrinks(inputText);
     }
 
     if (radioValue === 'Name' && url === urlFoods) {
       fetchSearchByName(inputText);
-    } else if (url === urlDrinks) {
+    } else if (radioValue === 'Name' && url === urlDrinks) {
       fetchSearchByNameDrinks(inputText);
     }
 
@@ -42,12 +42,13 @@ function SearchBar() {
 
     if (radioValue === 'FirstLetter' && url === urlFoods) {
       fetchSearchByFirstLetter(inputText);
-    } else if (url === urlDrinks) {
+    } else if (radioValue === 'FirstLetter' && url === urlDrinks) {
       fetchSearchByFirstLetterDrinks(inputText);
     }
   }
 
   function redirectByID() {
+    console.log(resultDataDrinks);
     if (url === urlFoods && resultDataMeals.length === 1) {
       history.push(`/foods/${resultDataMeals[0].idMeal}`);
     } else if (url === urlDrinks && resultDataDrinks.length === 1) {
