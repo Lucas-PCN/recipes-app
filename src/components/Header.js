@@ -23,7 +23,7 @@ function Header(props) {
           <img src={ profileIcon } alt="profileIcon" />
         </button>
 
-        <h2 data-testid="page-title">{ title }</h2>
+        <h1 data-testid="page-title">{ title }</h1>
 
         <button
           type="button"

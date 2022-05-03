@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Profile() {
   const history = useHistory();
@@ -9,8 +10,7 @@ function Profile() {
   return (
     <>
       <Header title="Profile" shouldRenderMagnifier={ false } />
-      {/* <h1 data-testid="page-title">Profile</h1> */}
-      <h1 data-testid="profile-email">{user.email}</h1>
+      <h2 data-testid="profile-email">{user.email}</h2>
       <button
         data-testid="profile-done-btn"
         type="button"
@@ -39,6 +39,7 @@ function Profile() {
       >
         Logout
       </button>
+      <Footer />
     </>
   );
 }
