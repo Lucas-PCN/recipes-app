@@ -10,7 +10,7 @@ function Profile() {
   return (
     <>
       <Header title="Profile" shouldRenderMagnifier={ false } />
-      <h1 data-testid="profile-email">{user.email}</h1>
+      <h1 data-testid="profile-email">{ user.email }</h1>
       <button
         data-testid="profile-done-btn"
         type="button"
