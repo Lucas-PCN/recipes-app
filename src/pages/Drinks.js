@@ -8,11 +8,11 @@ function Drinks() {
   const twelve = 12;
   const five = 5;
   const { resultAPIdrinks,
-    resultAPIdrinksCategoties,
+    resultAPIdrinksCategories,
     fetchDrinksCategoriesSelected,
     resultAPIdrinksCategoriesSelected } = useContext(MyContext);
   const twelveFirsts = resultAPIdrinks.slice(0, twelve);
-  const fiveFirsts = resultAPIdrinksCategoties.slice(0, five);
+  const fiveFirsts = resultAPIdrinksCategories.slice(0, five);
   const twelveFirstsCategory = resultAPIdrinksCategoriesSelected.slice(0, twelve);
 
   if (auxState === true) {

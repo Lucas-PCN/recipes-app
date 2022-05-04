@@ -12,19 +12,19 @@ function Provider({ children }) {
   const [resultArea, setResultArea] = useState([]);
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
-  const [resultAPIfoodsCategoties, setResultAPIfoodsCategories] = useState([]);
-  const [resultAPIdrinksCategoties, setResultAPIdrinksCategories] = useState([]);
+  const [resultAPIfoodsCategories, setResultAPIfoodsCategories] = useState([]);
+  const [resultAPIdrinksCategories, setResultAPIdrinksCategories] = useState([]);
   const [resultAPIfoodsCategoriesSelected,
     setResultAPIfoodsCategoriesSelected] = useState([]);
   const [resultAPIdrinksCategoriesSelected,
     setResultAPIdrinksCategoriesSelected] = useState([]);
 
   async function fetchFoodsCategoriesSelected(category) {
-    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultAPIfoodsCategoriesSelected(data.drinks);
+    setResultAPIfoodsCategoriesSelected(data.meals);
   }
 
   async function fetchDrinksCategoriesSelected(category) {
@@ -209,8 +209,8 @@ function Provider({ children }) {
     fetchDrinksCategoriesSelected,
     resultDataMeals,
     resultDataDrinks,
-    resultAPIfoodsCategoties,
-    resultAPIdrinksCategoties,
+    resultAPIfoodsCategories,
+    resultAPIdrinksCategories,
     resultArea,
     resultAPIfoodsCategoriesSelected,
     resultAPIdrinksCategoriesSelected,
