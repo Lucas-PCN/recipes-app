@@ -146,6 +146,7 @@ function Provider({ children }) {
     };
     aleatoryFoodsByNationalities();
   }, []);
+
   useEffect(() => {
     const aleatoryFoodsIngredients = async () => {
       const data = await fetchAleatoryFoodsByIngredients();
@@ -153,6 +154,7 @@ function Provider({ children }) {
     };
     aleatoryFoodsIngredients();
   }, []);
+
   useEffect(() => {
     const aleatoryDrinksIngredients = async () => {
       const data = await fetchAleatoryDrinksByIngredients();
@@ -185,12 +187,9 @@ function Provider({ children }) {
     fetchSearchFoods,
     resultDataMeals,
     resultDataDrinks,
-<<<<<<< HEAD
     resultAPIfoodsCategoties,
     resultAPIdrinksCategoties,
-=======
     resultArea,
->>>>>>> 65495d1dfacf4b567eb2c946a7dab07f850d9c4c
   };
 
   return (
