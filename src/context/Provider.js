@@ -12,7 +12,9 @@ function Provider({ children }) {
   const [resultArea, setResultArea] = useState([]);
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
+  const [filterState, setFilterState] = useState(false);
 
+  const nullAlert = 'Sorry, we haven\'t found any recipes for these filters.';
   async function fetchSearchFoods() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
@@ -39,7 +41,12 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultDataMeals(data.meals);
+    if (data.meals) {
+      setResultDataMeals(data.meals);
+    } else {
+      setResultDataMeals([]);
+      global.alert(nullAlert);
+    }
   }
 
   async function fetchSearchByNationalitie() {
@@ -54,7 +61,12 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultDataMeals(data.meals);
+    if (data.meals) {
+      setResultDataMeals(data.meals);
+    } else {
+      setResultDataMeals([]);
+      global.alert(nullAlert);
+    }
   }
 
   async function fetchSearchByFirstLetter(letter) {
@@ -62,7 +74,12 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultDataMeals(data.meals);
+    if (data.meals) {
+      setResultDataMeals(data.meals);
+    } else {
+      setResultDataMeals([]);
+      global.alert(nullAlert);
+    }
   }
 
   async function fetchSearchByNameDrinks(name) {
@@ -71,7 +88,12 @@ function Provider({ children }) {
     const response = await fetch(URL);
     const data = await response.json();
     console.log(data);
-    setResultDataDrinks(data.drinks);
+    if (data.drinks) {
+      setResultDataDrinks(data.drinks);
+    } else {
+      setResultDataDrinks([]);
+      global.alert(nullAlert);
+    }
   }
 
   async function fetchSearchByIngredientsDrinks(ingredient) {
@@ -79,7 +101,12 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultDataDrinks(data.drinks);
+    if (data.drinks) {
+      setResultDataDrinks(data.drinks);
+    } else {
+      setResultDataDrinks([]);
+      global.alert(nullAlert);
+    }
   }
 
   async function fetchSearchByFirstLetterDrinks(letter) {
@@ -87,7 +114,12 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultDataDrinks(data.drinks);
+    if (data.drinks) {
+      setResultDataDrinks(data.drinks);
+    } else {
+      setResultDataDrinks([]);
+      global.alert(nullAlert);
+    }
   }
 
   async function fetchAleatoryFoodsByIngredients() {
@@ -165,6 +197,8 @@ function Provider({ children }) {
     resultDataMeals,
     resultDataDrinks,
     resultArea,
+    filterState,
+    setFilterState,
   };
 
   return (
