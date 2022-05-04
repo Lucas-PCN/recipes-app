@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 
@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [inputText, setInputText] = useState('');
   const [resultDataMeals, setResultDataMeals] = useState([]);
   const [resultDataDrinks, setResultDataDrinks] = useState([]);
+  const [resultArea, setResultArea] = useState([]);
 
   async function fetchSearchByName(name) {
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
@@ -16,6 +17,14 @@ function Provider({ children }) {
     const response = await fetch(URL);
     const data = await response.json();
     setResultDataMeals(data.meals);
+  }
+
+  async function fetchSearchByNationalitie() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
   }
   async function fetchSearchByIngredients(ingredient) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
@@ -58,9 +67,56 @@ function Provider({ children }) {
     setResultDataDrinks(data.drinks);
   }
 
-  // useEffect(() => {
+  async function fetchAleatoryFoodsByIngredients() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 
-  // }, [resultData]);
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+  async function fetchAleatoryDrinksByIngredients() {
+    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+  async function fetchAleatoryFoodsByNationalities() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+  async function fetchAFoodsByArea(nationalitie) {
+    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalitie}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+
+  useEffect(() => {
+    const aleatoryFoodsByNationalities = async () => {
+      const data = await fetchAleatoryFoodsByNationalities();
+      setResultArea(data.meals);
+    };
+    aleatoryFoodsByNationalities();
+  }, []);
+  useEffect(() => {
+    const aleatoryFoodsIngredients = async () => {
+      const data = await fetchAleatoryFoodsByIngredients();
+      setResultDataMeals(data.meals);
+    };
+    aleatoryFoodsIngredients();
+  }, []);
+  useEffect(() => {
+    const aleatoryDrinksIngredients = async () => {
+      const data = await fetchAleatoryDrinksByIngredients();
+      setResultDataDrinks(data.drinks);
+    };
+    aleatoryDrinksIngredients();
+  }, []);
 
   const contextValue = {
     disabled,
@@ -77,8 +133,12 @@ function Provider({ children }) {
     fetchSearchByIngredients,
     fetchSearchByFirstLetter,
     fetchSearchByFirstLetterDrinks,
+    fetchAleatoryFoodsByIngredients,
+    fetchAFoodsByArea,
+    fetchSearchByNationalitie,
     resultDataMeals,
     resultDataDrinks,
+    resultArea,
   };
 
   return (
