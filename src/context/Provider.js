@@ -137,7 +137,6 @@ function Provider({ children }) {
       setResultDataDrinks([]);
       global.alert(nullAlert);
     }
-
   }
 
   async function fetchSearchByIngredientsDrinks(ingredient) {

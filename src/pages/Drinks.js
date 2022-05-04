@@ -54,10 +54,6 @@ function Drinks() {
     );
   }
 
-  const { resultAPIdrinks, filterState, resultDataDrinks } = useContext(MyContext);
-  const twelveFirsts = resultAPIdrinks.slice(0, twelve);
-  const filterTwelve = resultDataDrinks.slice(0, twelve);
-
   return (
     <>
       <Header title="Drinks" shouldRenderMagnifier />
