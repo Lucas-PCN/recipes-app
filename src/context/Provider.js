@@ -14,6 +14,26 @@ function Provider({ children }) {
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
   const [resultAPIfoodsCategoties, setResultAPIfoodsCategories] = useState([]);
   const [resultAPIdrinksCategoties, setResultAPIdrinksCategories] = useState([]);
+  const [resultAPIfoodsCategoriesSelected,
+    setResultAPIfoodsCategoriesSelected] = useState([]);
+  const [resultAPIdrinksCategoriesSelected,
+    setResultAPIdrinksCategoriesSelected] = useState([]);
+
+  async function fetchFoodsCategoriesSelected(category) {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    setResultAPIfoodsCategoriesSelected(data.drinks);
+  }
+
+  async function fetchDrinksCategoriesSelected(category) {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    setResultAPIdrinksCategoriesSelected(data.drinks);
+  }
 
   async function fetchFoodsCategories() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -185,11 +205,15 @@ function Provider({ children }) {
     fetchSearchByNationalitie,
     fetchSearchDrinks,
     fetchSearchFoods,
+    fetchFoodsCategoriesSelected,
+    fetchDrinksCategoriesSelected,
     resultDataMeals,
     resultDataDrinks,
     resultAPIfoodsCategoties,
     resultAPIdrinksCategoties,
     resultArea,
+    resultAPIfoodsCategoriesSelected,
+    resultAPIdrinksCategoriesSelected,
   };
 
   return (

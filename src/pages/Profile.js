@@ -5,13 +5,12 @@ import Footer from '../components/Footer';
 
 function Profile() {
   const history = useHistory();
-  // const localData = localStorage.getItem('user');
-  // const localResult = JSON.parse(localData);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <>
       <Header title="Profile" shouldRenderMagnifier={ false } />
-      {/* <h2 data-testid="profile-email">{localResult.email}</h2> */}
+      <h2 data-testid="profile-email">{user?.email}</h2>
       <button
         data-testid="profile-done-btn"
         type="button"
