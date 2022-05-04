@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 
 function SearchBar() {
+  const history = useHistory();
   const [radioValue, setRadioValue] = useState('Ingredient');
   const { inputText,
     setInputText,
@@ -10,7 +12,9 @@ function SearchBar() {
     fetchSearchByIngredientsDrinks,
     fetchSearchByIngredients,
     fetchSearchByFirstLetter,
-    fetchSearchByFirstLetterDrinks } = useContext(MyContext);
+    fetchSearchByFirstLetterDrinks,
+    resultDataMeals,
+    resultDataDrinks } = useContext(MyContext);
 
   function targetInput({ target }) {
     setInputText(target.value);
@@ -18,34 +22,48 @@ function SearchBar() {
 
   const url = window.location.href;
   const urlDrinks = 'http://localhost:3000/drinks';
-  async function searchByRadioButton() {
-    if (radioValue === 'Ingredient') {
+  const urlFoods = 'http://localhost:3000/foods';
+  function searchByRadioButton() {
+    if (radioValue === 'Ingredient' && url === urlFoods) {
       fetchSearchByIngredients(inputText);
-      if (url === urlDrinks) {
-        fetchSearchByIngredientsDrinks(inputText);
-      }
+    } else if (radioValue === 'Ingredient' && url === urlDrinks) {
+      fetchSearchByIngredientsDrinks(inputText);
     }
-    if (radioValue === 'Name') {
+
+    if (radioValue === 'Name' && url === urlFoods) {
       fetchSearchByName(inputText);
-      if (url === urlDrinks) {
-        fetchSearchByNameDrinks(inputText);
-      }
+    } else if (radioValue === 'Name' && url === urlDrinks) {
+      fetchSearchByNameDrinks(inputText);
     }
-    if (radioValue === 'FirstLetter') {
+
+    if (radioValue === 'FirstLetter' && inputText.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    }
+
+    if (radioValue === 'FirstLetter' && url === urlFoods) {
       fetchSearchByFirstLetter(inputText);
-      if (url === urlDrinks) {
-        fetchSearchByFirstLetterDrinks(inputText);
-      }
-      if (inputText.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
-      }
+    } else if (radioValue === 'FirstLetter' && url === urlDrinks) {
+      fetchSearchByFirstLetterDrinks(inputText);
+    }
+  }
+
+  function redirectByID() {
+    console.log(resultDataDrinks);
+    if (url === urlFoods && resultDataMeals.length === 1) {
+      history.push(`/foods/${resultDataMeals[0].idMeal}`);
+    } else if (url === urlDrinks && resultDataDrinks.length === 1) {
+      history.push(`/drinks/${resultDataDrinks[0].idDrink}`);
     }
   }
 
   function click() {
     searchByRadioButton();
   }
-  console.log(radioValue);
+
+  useEffect(() => {
+    redirectByID();
+  }, [resultDataMeals, resultDataDrinks]);
+
   return (
     <div>
       <input
