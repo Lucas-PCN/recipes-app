@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 
@@ -10,6 +10,29 @@ function Provider({ children }) {
   const [resultDataMeals, setResultDataMeals] = useState([]);
   const [resultDataDrinks, setResultDataDrinks] = useState([]);
   const [resultArea, setResultArea] = useState([]);
+  const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
+  const [resultAPIfoods, setResultAPIfoods] = useState([]);
+
+  async function fetchSearchFoods() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    setResultAPIfoods(data.meals);
+  }
+
+  async function fetchSearchDrinks() {
+    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    setResultAPIdrinks(data.drinks);
+  }
+
+  useEffect(() => {
+    fetchSearchDrinks();
+    fetchSearchFoods();
+  }, []);
 
   async function fetchSearchByName(name) {
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
@@ -127,6 +150,8 @@ function Provider({ children }) {
     setPassword,
     inputText,
     setInputText,
+    resultAPIdrinks,
+    resultAPIfoods,
     fetchSearchByName,
     fetchSearchByNameDrinks,
     fetchSearchByIngredientsDrinks,
@@ -136,6 +161,7 @@ function Provider({ children }) {
     fetchAleatoryFoodsByIngredients,
     fetchAFoodsByArea,
     fetchSearchByNationalitie,
+    fetchSearchDrinks,
     resultDataMeals,
     resultDataDrinks,
     resultArea,
