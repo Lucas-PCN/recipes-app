@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import MyContext from './MyContext';
 
 function Provider({ children }) {
@@ -8,61 +7,60 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputText, setInputText] = useState('');
-  const [resultAPIbyName, setResultAPIbyName] = useState([]);
-  const [resultAPIbyNameDrinks, setResultAPIbyNameDrinks] = useState([]);
-  const [resultAPIbyIngredient, setResultAPIbyIngredient] = useState([]);
-  const [resultAPIbyIngredientDrinks, setResultAPIbyIngredientDrinks] = useState([]);
-  const [resultAPIbyLetter, setResultAPIbyLetter] = useState([]);
-  const [resultAPIbyLetterDrinks, setResultAPIbyLetterDrinks] = useState([]);
+  const [resultDataMeals, setResultDataMeals] = useState([]);
+  const [resultDataDrinks, setResultDataDrinks] = useState([]);
 
   async function fetchSearchByName(name) {
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
 
     const response = await fetch(URL);
     const data = await response.json();
-    setResultAPIbyName(data);
-    console.log(data);
+    setResultDataMeals(data.meals);
   }
-
-  async function fetchSearchByNameDrinks(name) {
-    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
-
-    const response = await fetch(URL);
-    const { data } = await response.json();
-    setResultAPIbyNameDrinks(data);
-  }
-
-  async function fetchSearchByIngredientsDrinks(ingredient) {
-    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
-
-    const response = await fetch(URL);
-    const { data } = await response.json();
-    setResultAPIbyIngredientDrinks(data);
-  }
-
   async function fetchSearchByIngredients(ingredient) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
     const response = await fetch(URL);
-    const { data } = await response.json();
-    setResultAPIbyIngredient(data);
+    const data = await response.json();
+    setResultDataMeals(data.meals);
   }
 
   async function fetchSearchByFirstLetter(letter) {
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
 
     const response = await fetch(URL);
-    const { data } = await response.json();
-    setResultAPIbyLetter(data);
+    const data = await response.json();
+    setResultDataMeals(data.meals);
+  }
+
+  async function fetchSearchByNameDrinks(name) {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    console.log(data);
+    setResultDataDrinks(data.drinks);
+  }
+
+  async function fetchSearchByIngredientsDrinks(ingredient) {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    setResultDataDrinks(data.drinks);
   }
 
   async function fetchSearchByFirstLetterDrinks(letter) {
     const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
 
     const response = await fetch(URL);
-    const { data } = await response.json();
-    setResultAPIbyLetterDrinks(data);
+    const data = await response.json();
+    setResultDataDrinks(data.drinks);
   }
+
+  // useEffect(() => {
+
+  // }, [resultData]);
 
   const contextValue = {
     disabled,
@@ -73,18 +71,14 @@ function Provider({ children }) {
     setPassword,
     inputText,
     setInputText,
-    resultAPIbyName,
-    resultAPIbyIngredient,
-    resultAPIbyLetter,
-    resultAPIbyIngredientDrinks,
-    resultAPIbyNameDrinks,
-    resultAPIbyLetterDrinks,
     fetchSearchByName,
     fetchSearchByNameDrinks,
     fetchSearchByIngredientsDrinks,
     fetchSearchByIngredients,
     fetchSearchByFirstLetter,
     fetchSearchByFirstLetterDrinks,
+    resultDataMeals,
+    resultDataDrinks,
   };
 
   return (
