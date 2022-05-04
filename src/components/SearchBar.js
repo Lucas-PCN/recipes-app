@@ -23,6 +23,7 @@ function SearchBar() {
   const url = window.location.href;
   const urlDrinks = 'http://localhost:3000/drinks';
   const urlFoods = 'http://localhost:3000/foods';
+
   function searchByRadioButton() {
     if (radioValue === 'Ingredient' && url === urlFoods) {
       fetchSearchByIngredients(inputText);

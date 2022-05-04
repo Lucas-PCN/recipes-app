@@ -33,7 +33,6 @@ function Provider({ children }) {
     fetchSearchFoods();
   }, []);
 
-
   async function fetchSearchByName(name) {
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
 
@@ -41,6 +40,7 @@ function Provider({ children }) {
     const data = await response.json();
     setResultDataMeals(data.meals);
   }
+
   async function fetchSearchByIngredients(ingredient) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
@@ -62,7 +62,6 @@ function Provider({ children }) {
 
     const response = await fetch(URL);
     const data = await response.json();
-    console.log(data);
     setResultDataDrinks(data.drinks);
   }
 
@@ -82,10 +81,6 @@ function Provider({ children }) {
     setResultDataDrinks(data.drinks);
   }
 
-  // useEffect(() => {
-
-  // }, [resultData]);
-
   const contextValue = {
     disabled,
     setDisabled,
@@ -104,6 +99,7 @@ function Provider({ children }) {
     fetchSearchByFirstLetter,
     fetchSearchByFirstLetterDrinks,
     fetchSearchDrinks,
+    fetchSearchFoods,
     resultDataMeals,
     resultDataDrinks,
   };
