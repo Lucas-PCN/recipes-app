@@ -54,6 +54,10 @@ function Drinks() {
     );
   }
 
+  const { resultAPIdrinks, filterState, resultDataDrinks } = useContext(MyContext);
+  const twelveFirsts = resultAPIdrinks.slice(0, twelve);
+  const filterTwelve = resultDataDrinks.slice(0, twelve);
+
   return (
     <>
       <Header title="Drinks" shouldRenderMagnifier />
@@ -74,7 +78,7 @@ function Drinks() {
         }
       </div>
       {
-        twelveFirsts.map((element, index) => (
+        filterState === true ? filterTwelve.map((element, index) => (
           <div key={ index } data-testid={ `${index}-recipe-card` }>
             <img
               src={ element.strDrinkThumb }
@@ -86,6 +90,18 @@ function Drinks() {
             </p>
           </div>
         ))
+          : twelveFirsts.map((element, index) => (
+            <div key={ index } data-testid={ `${index}-recipe-card` }>
+              <img
+                src={ element.strDrinkThumb }
+                alt="drink"
+                data-testid={ `${index}-card-img` }
+              />
+              <p data-testid={ `${index}-card-name` }>
+                { element.strDrink }
+              </p>
+            </div>
+          ))
       }
       <Footer />
     </>

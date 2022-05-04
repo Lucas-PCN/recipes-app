@@ -14,7 +14,8 @@ function SearchBar() {
     fetchSearchByFirstLetter,
     fetchSearchByFirstLetterDrinks,
     resultDataMeals,
-    resultDataDrinks } = useContext(MyContext);
+    resultDataDrinks,
+    setFilterState } = useContext(MyContext);
 
   function targetInput({ target }) {
     setInputText(target.value);
@@ -49,7 +50,6 @@ function SearchBar() {
   }
 
   function redirectByID() {
-    console.log(resultDataDrinks);
     if (url === urlFoods && resultDataMeals.length === 1) {
       history.push(`/foods/${resultDataMeals[0].idMeal}`);
     } else if (url === urlDrinks && resultDataDrinks.length === 1) {
@@ -59,6 +59,7 @@ function SearchBar() {
 
   function click() {
     searchByRadioButton();
+    setFilterState(true);
   }
 
   useEffect(() => {
