@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [inputText, setInputText] = useState('');
   const [resultDataMeals, setResultDataMeals] = useState([]);
   const [resultDataDrinks, setResultDataDrinks] = useState([]);
+  const [resultArea, setResultArea] = useState([]);
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
   const [resultAPIfoodsCategoties, setResultAPIfoodsCategories] = useState([]);
@@ -61,6 +62,14 @@ function Provider({ children }) {
     setResultDataMeals(data.meals);
   }
 
+  async function fetchSearchByNationalitie() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+
   async function fetchSearchByIngredients(ingredient) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
@@ -101,6 +110,57 @@ function Provider({ children }) {
     setResultDataDrinks(data.drinks);
   }
 
+  async function fetchAleatoryFoodsByIngredients() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+  async function fetchAleatoryDrinksByIngredients() {
+    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+  async function fetchAleatoryFoodsByNationalities() {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+  async function fetchAFoodsByArea(nationalitie) {
+    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalitie}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  }
+
+  useEffect(() => {
+    const aleatoryFoodsByNationalities = async () => {
+      const data = await fetchAleatoryFoodsByNationalities();
+      setResultArea(data.meals);
+    };
+    aleatoryFoodsByNationalities();
+  }, []);
+  useEffect(() => {
+    const aleatoryFoodsIngredients = async () => {
+      const data = await fetchAleatoryFoodsByIngredients();
+      setResultDataMeals(data.meals);
+    };
+    aleatoryFoodsIngredients();
+  }, []);
+  useEffect(() => {
+    const aleatoryDrinksIngredients = async () => {
+      const data = await fetchAleatoryDrinksByIngredients();
+      setResultDataDrinks(data.drinks);
+    };
+    aleatoryDrinksIngredients();
+  }, []);
+
   const contextValue = {
     disabled,
     setDisabled,
@@ -118,12 +178,19 @@ function Provider({ children }) {
     fetchSearchByIngredients,
     fetchSearchByFirstLetter,
     fetchSearchByFirstLetterDrinks,
+    fetchAleatoryFoodsByIngredients,
+    fetchAFoodsByArea,
+    fetchSearchByNationalitie,
     fetchSearchDrinks,
     fetchSearchFoods,
     resultDataMeals,
     resultDataDrinks,
+<<<<<<< HEAD
     resultAPIfoodsCategoties,
     resultAPIdrinksCategoties,
+=======
+    resultArea,
+>>>>>>> 65495d1dfacf4b567eb2c946a7dab07f850d9c4c
   };
 
   return (
