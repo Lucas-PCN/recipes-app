@@ -5,12 +5,27 @@ import MyContext from '../context/MyContext';
 
 function Foods() {
   const twelve = 12;
-  const { resultAPIfoods } = useContext(MyContext);
+  const five = 5;
+  const { resultAPIfoods, resultAPIfoodsCategoties } = useContext(MyContext);
   const twelveFirsts = resultAPIfoods.slice(0, twelve);
+  const fiveFirsts = resultAPIfoodsCategoties.slice(0, five);
 
   return (
     <>
       <Header title="Foods" shouldRenderMagnifier />
+      <div>
+        {
+          fiveFirsts.map((element, index) => (
+            <button
+              key={ index }
+              type="button"
+              data-testid={ `${element.strCategory}-category-filter` }
+            >
+              { element.strCategory }
+            </button>
+          ))
+        }
+      </div>
       {
         twelveFirsts.map((element, index) => (
           <div key={ index } data-testid={ `${index}-recipe-card` }>
