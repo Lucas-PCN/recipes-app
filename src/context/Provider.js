@@ -100,8 +100,6 @@ function Provider({ children }) {
   async function fetchSearchByNameDrinks(name) {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await response.json();
-    setResultDataDrinks(data.drinks);
-    console.log(data);
     nullConditionalDrinks(data);
   }
   async function fetchSearchByIngredientsDrinks(ingredient) {
