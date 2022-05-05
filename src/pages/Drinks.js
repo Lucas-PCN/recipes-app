@@ -5,6 +5,7 @@ import MyContext from '../context/MyContext';
 
 function Drinks() {
   const [auxState, setAuxState] = useState(false);
+  const [categorySelected, setCategorySelected] = useState('');
   const twelve = 12;
   const five = 5;
   const { resultAPIdrinks,
@@ -23,6 +24,14 @@ function Drinks() {
       <>
         <Header title="Drinks" shouldRenderMagnifier />
         <div>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            value="allButton"
+            onClick={ () => setAuxState(false) }
+          >
+            All
+          </button>
           {
             fiveFirsts.map((element, index) => (
               <button
@@ -30,8 +39,15 @@ function Drinks() {
                 type="button"
                 data-testid={ `${element.strCategory}-category-filter` }
                 value={ element.strCategory }
-                onClick={ ({ target }) => fetchDrinksCategoriesSelected(target.value)
-              && setAuxState(true) }
+                onClick={ ({ target }) => {
+                  fetchDrinksCategoriesSelected(target.value);
+                  if (element.strCategory === categorySelected) {
+                    setAuxState(false);
+                  } else {
+                    setAuxState(true);
+                    setCategorySelected(element.strCategory);
+                  }
+                } }
               >
                 { element.strCategory }
               </button>
@@ -74,6 +90,14 @@ function Drinks() {
     <>
       <Header title="Drinks" shouldRenderMagnifier />
       <div>
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          value="allButton"
+          onClick={ () => setAuxState(false) }
+        >
+          All
+        </button>
         {
           fiveFirsts.map((element, index) => (
             <button
@@ -81,8 +105,11 @@ function Drinks() {
               type="button"
               data-testid={ `${element.strCategory}-category-filter` }
               value={ element.strCategory }
-              onClick={ ({ target }) => fetchDrinksCategoriesSelected(target.value)
-              && setAuxState(true) }
+              onClick={ ({ target }) => {
+                fetchDrinksCategoriesSelected(target.value);
+                setAuxState(true);
+                setCategorySelected(element.strCategory);
+              } }
             >
               { element.strCategory }
             </button>
