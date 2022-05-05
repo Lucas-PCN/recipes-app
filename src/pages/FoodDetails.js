@@ -1,17 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MyContext from '../context/MyContext';
 
 function FoodDetails() {
   const { setResultDataMeals, resultDataMeals } = useContext(MyContext);
+  const { id_da_receita: id } = useParams();
 
-  async function mealsIdAPI(id) {
+  async function mealsIdAPI() {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
-    setResultDataMeals(data);
+    console.log(data.meals);
+    setResultDataMeals(data.meals);
   }
-  mealsIdAPI();
+
+  useEffect(() => {
+    mealsIdAPI();
+    console.log(id);
+  }, []);
+
+  useEffect(() => {
+    console.log(resultDataMeals);
+  }, [resultDataMeals]);
 
   return (
     <>
@@ -50,7 +61,7 @@ function FoodDetails() {
       </ul>
       <p data-testid="instructions">Instructions a serem inseridas</p>
       {/* Inserir tag vídeo aqui */}
-      {
+      {/* {
         resultDataMeals.map((index) => (
           <img
             key={ index }
@@ -58,7 +69,7 @@ function FoodDetails() {
             alt="drink"
           />
         ))
-      }
+      } */}
       <button
         type="button"
         data-testid="start-recipe-btn"

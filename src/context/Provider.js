@@ -199,6 +199,7 @@ function Provider({ children }) {
     resultArea,
     filterState,
     setFilterState,
+    setResultDataMeals,
   };
 
   return (

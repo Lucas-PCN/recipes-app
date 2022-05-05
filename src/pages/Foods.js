@@ -7,6 +7,7 @@ function Foods() {
   const twelve = 12;
   const { resultAPIfoods, resultDataMeals, filterState } = useContext(MyContext);
   const twelveFirsts = resultAPIfoods.slice(0, twelve);
+  console.log(resultDataMeals);
   return (
     <>
       <Header title="Foods" shouldRenderMagnifier />
