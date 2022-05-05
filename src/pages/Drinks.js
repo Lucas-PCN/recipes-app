@@ -8,12 +8,15 @@ function Drinks() {
   const twelve = 12;
   const five = 5;
   const { resultAPIdrinks,
+    filterState,
+    resultDataDrinks,
     resultAPIdrinksCategories,
     fetchDrinksCategoriesSelected,
     resultAPIdrinksCategoriesSelected } = useContext(MyContext);
   const twelveFirsts = resultAPIdrinks.slice(0, twelve);
   const fiveFirsts = resultAPIdrinksCategories.slice(0, five);
   const twelveFirstsCategory = resultAPIdrinksCategoriesSelected.slice(0, twelve);
+  const filterTwelve = resultDataDrinks.slice(0, twelve);
 
   if (auxState === true) {
     return (
@@ -36,18 +39,31 @@ function Drinks() {
           }
         </div>
         {
-          twelveFirstsCategory.map((element, index) => (
-            <div key={ element.idDrink } data-testid={ `${index}-recipe-card` }>
-              <img
-                src={ element.strDrinkThumb }
-                alt="drink"
-                data-testid={ `${index}-card-img` }
-              />
-              <p data-testid={ `${index}-card-name` }>
-                { element.strDrink }
-              </p>
-            </div>
-          ))
+          filterState === true
+            ? resultDataDrinks.slice(0, twelve).map((element, index) => (
+              <div key={ index } data-testid={ `${index}-recipe-card` }>
+                <img
+                  src={ element.strDrinkThumb }
+                  alt="drink"
+                  data-testid={ `${index}-card-img` }
+                />
+                <p data-testid={ `${index}-card-name` }>
+                  { element.strDrink }
+                </p>
+              </div>
+            ))
+            : twelveFirstsCategory.map((element, index) => (
+              <div key={ element.idDrink } data-testid={ `${index}-recipe-card` }>
+                <img
+                  src={ element.strDrinkThumb }
+                  alt="drink"
+                  data-testid={ `${index}-card-img` }
+                />
+                <p data-testid={ `${index}-card-name` }>
+                  { element.strDrink }
+                </p>
+              </div>
+            ))
         }
         <Footer />
       </>

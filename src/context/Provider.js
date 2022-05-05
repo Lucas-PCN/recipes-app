@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
@@ -12,12 +13,15 @@ function Provider({ children }) {
   const [resultArea, setResultArea] = useState([]);
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
+  const [filterState, setFilterState] = useState([]);
   const [resultAPIfoodsCategories, setResultAPIfoodsCategories] = useState([]);
   const [resultAPIdrinksCategories, setResultAPIdrinksCategories] = useState([]);
   const [resultAPIfoodsCategoriesSelected,
     setResultAPIfoodsCategoriesSelected] = useState([]);
   const [resultAPIdrinksCategoriesSelected,
     setResultAPIdrinksCategoriesSelected] = useState([]);
+
+  const nullAlert = 'Sorry, we haven\'t found any recipes for these filters.';
 
   async function fetchFoodsCategoriesSelected(category) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
@@ -51,9 +55,6 @@ function Provider({ children }) {
     setResultAPIdrinksCategories(data.drinks);
   }
 
-  const [filterState, setFilterState] = useState(false);
-
-  const nullAlert = 'Sorry, we haven\'t found any recipes for these filters.';
   async function fetchSearchFoods() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
@@ -172,6 +173,7 @@ function Provider({ children }) {
     const data = await response.json();
     return data;
   }
+
   async function fetchAleatoryDrinksByIngredients() {
     const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 
@@ -179,6 +181,7 @@ function Provider({ children }) {
     const data = await response.json();
     return data;
   }
+
   async function fetchAleatoryFoodsByNationalities() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 
@@ -186,6 +189,7 @@ function Provider({ children }) {
     const data = await response.json();
     return data;
   }
+
   async function fetchAFoodsByArea(nationalitie) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalitie}`;
 
@@ -246,9 +250,9 @@ function Provider({ children }) {
     resultDataDrinks,
     resultAPIfoodsCategories,
     resultAPIdrinksCategories,
-    resultArea,
     resultAPIfoodsCategoriesSelected,
     resultAPIdrinksCategoriesSelected,
+    resultArea,
     filterState,
     setFilterState,
   };

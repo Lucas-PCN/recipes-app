@@ -10,7 +10,9 @@ function Foods() {
   const { resultAPIfoods,
     resultAPIfoodsCategories,
     fetchFoodsCategoriesSelected,
-    resultAPIfoodsCategoriesSelected } = useContext(MyContext);
+    resultAPIfoodsCategoriesSelected,
+    resultDataMeals,
+    filterState } = useContext(MyContext);
   const twelveFirsts = resultAPIfoods.slice(0, twelve);
   const fiveFirsts = resultAPIfoodsCategories.slice(0, five);
   const twelveFirstsCategory = resultAPIfoodsCategoriesSelected.slice(0, twelve);
@@ -36,18 +38,31 @@ function Foods() {
           }
         </div>
         {
-          twelveFirstsCategory.map((element, index) => (
-            <div key={ element.idMeal } data-testid={ `${index}-recipe-card` }>
-              <img
-                src={ element.strMealThumb }
-                alt="food"
-                data-testid={ `${index}-card-img` }
-              />
-              <p data-testid={ `${index}-card-name` }>
-                { element.strMeal }
-              </p>
-            </div>
-          ))
+          filterState === true
+            ? resultDataMeals.slice(0, twelve).map((element, index) => (
+              <div key={ index } data-testid={ `${index}-recipe-card` }>
+                <img
+                  src={ element.strMealThumb }
+                  alt="food"
+                  data-testid={ `${index}-card-img` }
+                />
+                <p data-testid={ `${index}-card-name` }>
+                  { element.strMeal }
+                </p>
+              </div>
+            ))
+            : twelveFirstsCategory.map((element, index) => (
+              <div key={ element.idMeal } data-testid={ `${index}-recipe-card` }>
+                <img
+                  src={ element.strMealThumb }
+                  alt="food"
+                  data-testid={ `${index}-card-img` }
+                />
+                <p data-testid={ `${index}-card-name` }>
+                  { element.strMeal }
+                </p>
+              </div>
+            ))
         }
         <Footer />
       </>
