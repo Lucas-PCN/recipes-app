@@ -13,13 +13,14 @@ function Provider({ children }) {
   const [resultArea, setResultArea] = useState([]);
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
-  const [filterState, setFilterState] = useState([]);
   const [resultAPIfoodsCategories, setResultAPIfoodsCategories] = useState([]);
   const [resultAPIdrinksCategories, setResultAPIdrinksCategories] = useState([]);
   const [resultAPIfoodsCategoriesSelected,
     setResultAPIfoodsCategoriesSelected] = useState([]);
   const [resultAPIdrinksCategoriesSelected,
     setResultAPIdrinksCategoriesSelected] = useState([]);
+  const [filterState, setFilterState] = useState(false);
+  const [favoriteState, setFavoriteState] = useState(false);
 
   const nullAlert = 'Sorry, we haven\'t found any recipes for these filters.';
   function nullConditionalMeals(data) {
@@ -188,6 +189,9 @@ function Provider({ children }) {
     resultArea,
     filterState,
     setFilterState,
+    setResultDataMeals,
+    favoriteState,
+    setFavoriteState,
   };
 
   return (
