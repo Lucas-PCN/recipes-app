@@ -13,6 +13,7 @@ function Provider({ children }) {
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
   const [filterState, setFilterState] = useState(false);
+  const [favoriteState, setFavoriteState] = useState(false);
 
   const nullAlert = 'Sorry, we haven\'t found any recipes for these filters.';
   async function fetchSearchFoods() {
@@ -199,6 +200,9 @@ function Provider({ children }) {
     resultArea,
     filterState,
     setFilterState,
+    setResultDataMeals,
+    favoriteState,
+    setFavoriteState,
   };
 
   return (
