@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 function Profile() {
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
+
   return (
     <>
       <Header title="Profile" shouldRenderMagnifier={ false } />

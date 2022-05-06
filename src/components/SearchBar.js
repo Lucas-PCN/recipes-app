@@ -24,6 +24,7 @@ function SearchBar() {
   const url = window.location.href;
   const urlDrinks = 'http://localhost:3000/drinks';
   const urlFoods = 'http://localhost:3000/foods';
+
   function searchByRadioButton() {
     if (radioValue === 'Ingredient' && url === urlFoods) {
       fetchSearchByIngredients(inputText);
@@ -82,7 +83,7 @@ function SearchBar() {
           data-testid="ingredient-search-radio"
           value="Ingredient"
           name="radioButton"
-          checked={ radioValue === 'Ingredient' }
+          defaultChecked={ radioValue === 'Ingredient' }
           onClick={ ({ target }) => setRadioValue(target.value) }
         />
         Ingredient
@@ -94,7 +95,7 @@ function SearchBar() {
           data-testid="name-search-radio"
           value="Name"
           name="radioButton"
-          checked={ radioValue === 'Name' }
+          defaultChecked={ radioValue === 'Name' }
           onClick={ ({ target }) => setRadioValue(target.value) }
         />
         Name
@@ -106,7 +107,7 @@ function SearchBar() {
           data-testid="first-letter-search-radio"
           value="FirstLetter"
           name="radioButton"
-          checked={ radioValue === 'FirstLetter' }
+          defaultChecked={ radioValue === 'FirstLetter' }
           onClick={ ({ target }) => setRadioValue(target.value) }
         />
         First Letter

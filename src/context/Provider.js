@@ -12,22 +12,60 @@ function Provider({ children }) {
   const [resultArea, setResultArea] = useState([]);
   const [resultAPIdrinks, setResultAPIdrinks] = useState([]);
   const [resultAPIfoods, setResultAPIfoods] = useState([]);
+  const [resultAPIfoodsCategories, setResultAPIfoodsCategories] = useState([]);
+  const [resultAPIdrinksCategories, setResultAPIdrinksCategories] = useState([]);
+  const [resultAPIfoodsCategoriesSelected,
+    setResultAPIfoodsCategoriesSelected] = useState([]);
+  const [resultAPIdrinksCategoriesSelected,
+    setResultAPIdrinksCategoriesSelected] = useState([]);
   const [filterState, setFilterState] = useState(false);
   const [favoriteState, setFavoriteState] = useState(false);
 
   const nullAlert = 'Sorry, we haven\'t found any recipes for these filters.';
-  async function fetchSearchFoods() {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  function nullConditionalMeals(data) {
+    if (data.meals) {
+      setResultDataMeals(data.meals);
+    } else {
+      setResultDataMeals([]);
+      global.alert(nullAlert);
+    }
+  }
+  function nullConditionalDrinks(data) {
+    if (data.drinks) {
+      setResultDataDrinks(data.drinks);
+    } else {
+      setResultDataDrinks([]);
+      global.alert(nullAlert);
+    }
+  }
 
-    const response = await fetch(URL);
+  async function fetchFoodsCategoriesSelected(category) {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    const data = await response.json();
+    setResultAPIfoodsCategoriesSelected(data.meals);
+  }
+  async function fetchDrinksCategoriesSelected(category) {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+    const data = await response.json();
+    setResultAPIdrinksCategoriesSelected(data.drinks);
+  }
+  async function fetchFoodsCategories() {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    setResultAPIfoodsCategories(data.meals);
+  }
+  async function fetchDrinksCategories() {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    setResultAPIdrinksCategories(data.drinks);
+  }
+  async function fetchSearchFoods() {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
     setResultAPIfoods(data.meals);
   }
-
   async function fetchSearchDrinks() {
-    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-
-    const response = await fetch(URL);
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
     setResultAPIdrinks(data.drinks);
   }
@@ -35,119 +73,62 @@ function Provider({ children }) {
   useEffect(() => {
     fetchSearchDrinks();
     fetchSearchFoods();
+    fetchFoodsCategories();
+    fetchDrinksCategories();
   }, []);
 
   async function fetchSearchByName(name) {
-    const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await response.json();
-    if (data.meals) {
-      setResultDataMeals(data.meals);
-    } else {
-      setResultDataMeals([]);
-      global.alert(nullAlert);
-    }
+    nullConditionalMeals(data);
   }
-
   async function fetchSearchByNationalitie() {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-
-    const response = await fetch(URL);
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
     return data;
   }
   async function fetchSearchByIngredients(ingredient) {
-    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
     const data = await response.json();
-    if (data.meals) {
-      setResultDataMeals(data.meals);
-    } else {
-      setResultDataMeals([]);
-      global.alert(nullAlert);
-    }
+    nullConditionalMeals(data);
   }
-
   async function fetchSearchByFirstLetter(letter) {
-    const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`);
     const data = await response.json();
-    if (data.meals) {
-      setResultDataMeals(data.meals);
-    } else {
-      setResultDataMeals([]);
-      global.alert(nullAlert);
-    }
+    nullConditionalMeals(data);
   }
-
   async function fetchSearchByNameDrinks(name) {
-    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await response.json();
-    console.log(data);
-    if (data.drinks) {
-      setResultDataDrinks(data.drinks);
-    } else {
-      setResultDataDrinks([]);
-      global.alert(nullAlert);
-    }
+    nullConditionalDrinks(data);
   }
-
   async function fetchSearchByIngredientsDrinks(ingredient) {
-    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
     const data = await response.json();
-    if (data.drinks) {
-      setResultDataDrinks(data.drinks);
-    } else {
-      setResultDataDrinks([]);
-      global.alert(nullAlert);
-    }
+    nullConditionalDrinks(data);
   }
-
   async function fetchSearchByFirstLetterDrinks(letter) {
-    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`);
     const data = await response.json();
-    if (data.drinks) {
-      setResultDataDrinks(data.drinks);
-    } else {
-      setResultDataDrinks([]);
-      global.alert(nullAlert);
-    }
+    nullConditionalDrinks(data);
   }
-
   async function fetchAleatoryFoodsByIngredients() {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
-
-    const response = await fetch(URL);
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
     const data = await response.json();
     return data;
   }
   async function fetchAleatoryDrinksByIngredients() {
-    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
-
-    const response = await fetch(URL);
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
     const data = await response.json();
     return data;
   }
   async function fetchAleatoryFoodsByNationalities() {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
-
-    const response = await fetch(URL);
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
     const data = await response.json();
     return data;
   }
   async function fetchAFoodsByArea(nationalitie) {
-    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalitie}`;
-
-    const response = await fetch(URL);
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalitie}`);
     const data = await response.json();
     return data;
   }
@@ -195,8 +176,15 @@ function Provider({ children }) {
     fetchAFoodsByArea,
     fetchSearchByNationalitie,
     fetchSearchDrinks,
+    fetchSearchFoods,
+    fetchFoodsCategoriesSelected,
+    fetchDrinksCategoriesSelected,
     resultDataMeals,
     resultDataDrinks,
+    resultAPIfoodsCategories,
+    resultAPIdrinksCategories,
+    resultAPIfoodsCategoriesSelected,
+    resultAPIdrinksCategoriesSelected,
     resultArea,
     filterState,
     setFilterState,
