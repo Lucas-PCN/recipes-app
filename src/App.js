@@ -62,7 +62,7 @@ function App() {
           <Route exact path="/drinks" component={ Drinks } />
           <Route exact path="/foods" component={ Foods } />
           <Route exact path="/" component={ Login } />
-          <Route exact path="*" component={ NotFound } />
+          <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
         </Provider>
       </Switch>
     </BrowserRouter>
