@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
+import '../style/DoneRecipes.css';
 
 function DoneRecipeCard(props) {
   const { doneRecipe: {
@@ -11,6 +12,14 @@ function DoneRecipeCard(props) {
     image, doneDate,
     tags }, index } = props;
 
+  const [copied, setCopied] = useState(false);
+
+  async function handleClickShare() {
+    const url = `http://localhost:3000/foods/${id}`;
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+  }
+
   return (
     type === 'food'
       ? (
@@ -18,6 +27,7 @@ function DoneRecipeCard(props) {
           <Link to={ `/foods/${id}` } key={ name }>
             <div>
               <img
+                className="doneRecipeImage"
                 src={ image }
                 alt="Recipe"
                 data-testid={ `${index}-horizontal-image` }
@@ -53,10 +63,17 @@ function DoneRecipeCard(props) {
           <button
             type="button"
             data-testid={ `${index}-horizontal-share-btn` }
+            alt="Share button"
+            onClick={ handleClickShare }
             src={ shareIcon }
           >
-            copy link!
+            <img src={ shareIcon } alt="shareIcon" />
           </button>
+          {
+            copied
+              ? <p> Link copied! </p>
+              : ''
+          }
         </div>
       )
       : (
@@ -64,6 +81,7 @@ function DoneRecipeCard(props) {
           <Link to={ `/drinks/${id}` } key={ name }>
             <div>
               <img
+                className="doneRecipeImage"
                 src={ image }
                 alt="Recipe"
                 data-testid={ `${index}-horizontal-image` }
@@ -84,10 +102,17 @@ function DoneRecipeCard(props) {
           <button
             type="button"
             data-testid={ `${index}-horizontal-share-btn` }
+            alt="Share button"
+            onClick={ handleClickShare }
             src={ shareIcon }
           >
-            copy link!
+            <img src={ shareIcon } alt="shareIcon" />
           </button>
+          {
+            copied
+              ? <p> Link copied! </p>
+              : ''
+          }
         </div>
       )
   );
