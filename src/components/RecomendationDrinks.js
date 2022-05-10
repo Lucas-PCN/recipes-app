@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Recomendation.css';
+import '../style/Recomendation.css';
 
 function RecomendationDrinks() {
   const [resultData, setResultData] = useState([]);
