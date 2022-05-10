@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import './Details.css';
+import '../style/Details.css';
 import MyContext from '../context/MyContext';
 import RecomendationFoods from '../components/RecomendationFoods';
 
