@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../style/FavoriteRecipes.css';
 
 export default function FavoriteRecipesCard({ recipe, index, unFavorite }) {
   const [copiedLink, setCopiedLink] = useState(false);
@@ -22,6 +23,7 @@ export default function FavoriteRecipesCard({ recipe, index, unFavorite }) {
     <div>
       <Link to={ `/${recipe.type}s/${recipe.id}` }>
         <img
+          className="favoriteRecipeImage"
           data-testid={ `${index}-horizontal-image` }
           src={ recipe.image }
           alt={ `${recipe.name}` }
