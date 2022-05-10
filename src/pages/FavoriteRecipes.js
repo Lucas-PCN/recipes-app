@@ -46,7 +46,7 @@ function ReceitasFavoritas() {
 
   return (
     <div>
-      <Header title="Receitas Favoritas" />
+      <Header title="Favorite Recipes" shouldRenderMagnifier={ false } />
       <FavoriteRecipes
         handleClick={ handleClick }
         filteredFavoriteRecipes={ filteredFavoriteRecipes }
